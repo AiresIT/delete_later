@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "d64acd17-144a-4a85-bea6-f413aa9d564f",
+		"name": "PDT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Policy Benefit",
+			"item": [
+				{
+					"name": "POST - Create Policy Benefit ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json()\r",
+									"console.log(response)\r",
+									"const response_data = response.data\r",
+									"console.log(response_data)\r",
+									"const policyBenefitsConfigId = response_data.policyBenefitsConfigId\r",
+									"console.log(policyBenefitsConfigId)\r",
+									"pm.globals.set(\"policyBenefitsConfigId\", policyBenefitsConfigId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"version\": 11,\r\n  \"policyTypeCode\": \"USDOM\",\r\n  \"employeeTypeCode\": \"CURREMP\",\r\n  \"homeownerTypeCode\": \"HOMEOWNR\",\r\n  \"benefitPackageTypeCode\": \"BUNDLE\",\r\n  \"cappedPolicyCode\": \"YES\",\r\n  \"duplicateHousingBenefitInd\": true,\r\n  \"finalMoveBenefitInd\": true,\r\n  \"homeLeaveBenefitInd\": true,\r\n  \"homePurchaseBenefitInd\": true,\r\n  \"homeSaleBenefitInd\": true,\r\n  \"preAcceptanceBenefitInd\": true,\r\n  \"destinationServiceBenefitInd\": true,\r\n  \"houseHuntingBenefitInd\": true,\r\n  \"immigrationBenefitInd\": true,\r\n  \"languageTrainingBenefitInd\": true,\r\n  \"culturalTrainingBenefitInd\": true,\r\n  \"oneTimePaymentBenefitInd\": true,\r\n  \"onGoingBenefitInd\": true,\r\n  \"propertyManagementBenefitInd\": true,\r\n  \"assignmentHousingBenefitInd\": true,\r\n  \"temporaryLivingBenefitInd\": true,\r\n  \"houseHoldGoodsBenefitInd\": true,\r\n  \"usRentalAssistanceBenefitInd\": true,\r\n  \"exchgLossGrossedUpInd\": true,\r\n  \"compensationBenefitInd\": true,\r\n  \"exchgLossCurrencyCode\": \"USD\",\r\n  \"exchgLossMaxAmt\": \"1000\",\r\n  \"exchgLossComment\": \"ok\",\r\n  \"bankFeeComment\": \"ok\",\r\n  \"bankFeePaidByCode\": \"AIRES\",\r\n  \"bankFeeGrossedUpInd\": true,\r\n  \"bankFeeCurrencyCode\": \"USD\",\r\n  \"bankFeeMaxAmt\": 1000,\r\n  \"expnCurrencyCode\": \"USD\",\r\n  \"expnRcptReqIndvlAmt\": 1000,\r\n  \"expnRcptReqTotalAmt\": 1000,\r\n  \"expnRcptReqInd\": true,\r\n  \"exchgLossPaidByCode\": \"AIRES\",\r\n  \"exchgLossInd\": true,\r\n  \"bankFeeInd\": true,\r\n  \"expnMgmtInd\": true,\r\n  \"grossUpInd\": true,\r\n  \"paidByCode\": \"AIRES\",\r\n  \"createdBy\": 12456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/policies/{{policyID}}/benefits",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"policies",
+								"{{policyID}}",
+								"benefits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/policies/{{policyID}}/benefits/{{policyBenefitsConfigId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"policies",
+								"{{policyID}}",
+								"benefits",
+								"{{policyBenefitsConfigId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PDT-92",
+			"item": [
+				{
+					"name": "Response 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(2400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"duplicateHousingSubList\": [\r\n    {\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"benefitAuthorizedInd\": true,\r\n      \"durationCode\": \"ONE\",\r\n      \"durationOther\": 28,\r\n      \"grossedUpCode\": \"PARTIAL\",\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"employeeTypeInd\": true,\r\n  \"homeownerTypeInd\": true,\r\n  \"createdBy\": 12456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/benefits/{{policyBenefitsConfigId}}/duplicate-housing",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"benefits",
+								"{{policyBenefitsConfigId}}",
+								"duplicate-housing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Response 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"duplicateHousingSubList\": [\r\n    {\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"benefitAuthorizedInd\": true,\r\n      \"durationCode\": \"ONE\",\r\n      \"durationOther\": 28,\r\n      \"grossedUpCode\": \"PARTIAL\",\r\n      \"paidByCode\": ,\r\n      \"paidByOther\": \"Demo comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"employeeTypeInd\": true,\r\n  \"homeownerTypeInd\": true,\r\n  \"createdBy\": 12456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/benefits/{{policyBenefitsConfigId}}/duplicate-housing",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"benefits",
+								"{{policyBenefitsConfigId}}",
+								"duplicate-housing"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PDT-94 - InComplete",
+			"item": [
+				{
+					"name": "Create Final Move Benefit ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const fm_response = pm.response.json()\r",
+									"const fm_response_data = fm_response.data\r",
+									"const finalMoveBenefitID = fm_response_data.finalMoveBenefitId\r",
+									"pm.globals.set(\"finalMoveBenefitID\", finalMoveBenefitID);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"transportationInd\": true,\r\n  \"lodgingInd\": true,\r\n  \"mealsInd\": true,\r\n  \"lodgingEmpTypeInd\": true,\r\n  \"lodgingHomeTypeInd\": true,\r\n  \"mealsEmpTypeInd\": true,\r\n  \"mealsHomeTypeInd\": true,\r\n  \"transportationEmpTypeInd\": true,\r\n  \"transportationHomeTypeInd\": true,\r\n  \"benefitComment\": \"ok\",\r\n  \"finalMoveLodgingList\": [\r\n    {\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"benefitAuthorizedInd\": true,\r\n      \"finalMoveDurationCode\": \"NUMNIGHT\",\r\n      \"maxAmountCode\": \"FLAT\",\r\n      \"flatAmountPerNight\": 10,\r\n      \"currencyCode\": \"USD\",\r\n      \"numOfNight\": 10,\r\n      \"grossedUpInd\": true,\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"finalMoveMealsList\": [\r\n    {\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"numOfDay\": 10,\r\n      \"benefitAuthorizedInd\": true,\r\n      \"finalMoveDurationCode\": \"NUMNIGHT\",\r\n      \"mealTypeCode\": \"ALOWANCE\",\r\n      \"maxAmountCode\": \"FLAT\",\r\n      \"maxAmountEe\": 1000,\r\n      \"maxAmountAdult\": 1000,\r\n      \"maxAmountChild\": 1000,\r\n      \"currencyCodeEe\": \"USD\",\r\n      \"currencyCodeAdult\": \"USD\",\r\n      \"currencyCodeChild\": \"USD\",\r\n      \"detailEeCode\": \"TOTAL\",\r\n      \"detailAdultCode\": \"TOTAL\",\r\n      \"detailChildCode\": \"TOTAL\",\r\n      \"grossedUpInd\": true,\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"finalMoveTransportationList\": [\r\n    {\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"benefitAuthorizedInd\": true,\r\n      \"finalMoveTransportTypeList\": [\r\n        {\r\n          \"transportationTypeCode\": \"MILEAGE\"\r\n        }\r\n      ],\r\n      \"minMileageEconomy\": 10,\r\n      \"minMileageBusiness\": 10,\r\n      \"accompanyingFamilyMemberCode\": \"EEONLY\",\r\n      \"grossedUpInd\": true,\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo Comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"createdBy\": 12456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/benefits/{{policyBenefitsConfigId}}/final-move-benefits",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"benefits",
+								"{{policyBenefitsConfigId}}",
+								"final-move-benefits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Response 201",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"transportationInd\": true,\r\n  \"lodgingInd\": true,\r\n  \"mealsInd\": true,\r\n  \"lodgingEmpTypeInd\": true,\r\n  \"lodgingHomeTypeInd\": true,\r\n  \"mealsEmpTypeInd\": true,\r\n  \"mealsHomeTypeInd\": true,\r\n  \"transportationEmpTypeInd\": true,\r\n  \"transportationHomeTypeInd\": true,\r\n  \"benefitComment\": \"ok\",\r\n  \"finalMoveLodgingList\": [\r\n    {\r\n      \"finalMoveLodgingId\": 25,\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"benefitAuthorizedInd\": true,\r\n      \"finalMoveDurationCode\": \"NUMNIGHT\",\r\n      \"maxAmountCode\": \"FLAT\",\r\n      \"flatAmountPerNight\": 10,\r\n      \"currencyCode\": \"USD\",\r\n      \"numOfNight\": 10,\r\n      \"grossedUpInd\": true,\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"finalMoveMealsList\": [\r\n    {\r\n      \"finalMoveMealsId\": 25,\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"numOfDay\": 10,\r\n      \"benefitAuthorizedInd\": true,\r\n      \"finalMoveDurationCode\": \"NUMNIGHT\",\r\n      \"mealTypeCode\": \"ALOWANCE\",\r\n      \"maxAmountCode\": \"FLAT\",\r\n      \"maxAmountEe\": 1000,\r\n      \"maxAmountAdult\": 1000,\r\n      \"maxAmountChild\": 1000,\r\n      \"currencyCodeEe\": \"USD\",\r\n      \"currencyCodeAdult\": \"USD\",\r\n      \"currencyCodeChild\": \"USD\",\r\n      \"detailEeCode\": \"TOTAL\",\r\n      \"detailAdultCode\": \"TOTAL\",\r\n      \"detailChildCode\": \"TOTAL\",\r\n      \"grossedUpInd\": true,\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"finalMoveTransportationList\": [\r\n    {\r\n      \"finalMoveTransportationId\": 25,\r\n      \"differTypeCode\": \"CURREEOWN\",\r\n      \"benefitAuthorizedInd\": true,\r\n      \"finalMoveTransportTypeList\": [\r\n        {\r\n          \"finalmoveTransportTypeId\": 25,\r\n          \"transportationTypeCode\": \"MILEAGE\"\r\n        }\r\n      ],\r\n      \"minMileageEconomy\": 10,\r\n      \"minMileageBusiness\": 10,\r\n      \"accompanyingFamilyMemberCode\": \"EEONLY\",\r\n      \"grossedUpInd\": true,\r\n      \"paidByCode\": \"AIRES\",\r\n      \"paidByOther\": \"Demo Comment\",\r\n      \"feeCode\": \"CORE\",\r\n      \"benefitComment\": \"ok\"\r\n    }\r\n  ],\r\n  \"updatedBy\": 12456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/benefits/{{policyBenefitsConfigId}}/final-move-benefits/{{finalMoveBenefitID}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"benefits",
+								"{{policyBenefitsConfigId}}",
+								"final-move-benefits",
+								"{{finalMoveBenefitID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket Name",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
